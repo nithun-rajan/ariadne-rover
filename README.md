@@ -2,7 +2,6 @@
 
 **A vision-guided autonomous rover that finds marker gates with a camera and threads its way through them.**
 
-[![CI](https://github.com/nithun-rajan/ariadne-rover/actions/workflows/ci.yml/badge.svg)](https://github.com/nithun-rajan/ariadne-rover/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![OpenCV](https://img.shields.io/badge/OpenCV-4.10-green)
 ![C++17](https://img.shields.io/badge/C%2B%2B-17-orange)
@@ -12,9 +11,14 @@
 
 *▶ Watch the rover run the course (YouTube)*
 
-<!-- Photos: drop images into docs/images/ and reference them here, e.g.
-![The rover](docs/images/rover.jpg)
--->
+### What the rover sees
+
+![Live debug stream from the rover's camera](docs/images/camera-view.jpg)
+
+*The live debug stream from the rover's camera. Both marker cards are
+detected and decoded (boxed), paired into a gate (yellow line), and the gate
+centre (yellow dot) is tracked. The rover is on gate #4 (lower-case letters)
+in the `TRACKING` state, sending steering letter `i`: steer slightly left.*
 
 ## Why "Ariadne"?
 
@@ -69,9 +73,31 @@ The Pico turns letters into differential wheel speeds:
 - **Freshest-letter receiver:** each cycle drains the UART and acts only on the newest letter, so latency never builds up.
 - **Dead man's switch:** the Pi sends a letter every frame. If nothing valid arrives for 300 ms (a crash or a loose wire), the motors stop immediately.
 
-## Results
+## The build
 
-<!-- Add measurements, photos and the course layout here. -->
+<table>
+  <tr>
+    <td width="50%"><img src="docs/images/rover-on-grass.jpg" alt="Ariadne on the test field"></td>
+    <td width="50%"><img src="docs/images/electronics-bench.jpg" alt="Electronics on the lab bench"></td>
+  </tr>
+  <tr>
+    <td><em>Ariadne on the test field: a two-wheeled drum chassis with the camera mounted on top and an emergency stop.</em></td>
+    <td><em>Bring-up on the lab bench: motor drivers, power distribution and the Raspberry Pi Pico before integration.</em></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/field-repair.jpg" alt="Field repair before a run"></td>
+    <td><img src="docs/images/rover-lineup.jpg" alt="Ariadne lined up with the other rovers"></td>
+  </tr>
+  <tr>
+    <td><em>Last-minute field repairs before a run.</em></td>
+    <td><em>Lined up with the other teams' rovers on demo day (front, green wheels).</em></td>
+  </tr>
+</table>
+
+<p align="center">
+  <img src="docs/images/whiteboard.jpg" alt="Whiteboard: give nithun a sec" width="45%"><br>
+  <em>Debugging the vision pipeline, as seen by the rest of the team.</em>
+</p>
 
 ## Testing
 
@@ -118,6 +144,7 @@ docs/                   serial protocol, images
 
 ## Hardware
 
+- Two-wheeled drum chassis with large 3D-printed wheels and a hardware emergency stop
 - Raspberry Pi 4 with an OV5647 camera module
 - Raspberry Pi Pico (RP2040) driving two DC motors through a dual motor driver (DIR + PWM per motor)
 - Printed 4×4 marker cards on gate posts
