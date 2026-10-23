@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Firmware
+build/
+firmware/test/test_rover_move
+
+# Local
+vision/webcam_patterns.json
+.claude/
+.DS_Store
+.vscode/
+.idea/

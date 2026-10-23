@@ -1,0 +1,4 @@
+# On the rover, in addition to requirements.txt (or use the apt packages in vision/README.md)
+picamera2
+pyserial
+RPi.GPIO
