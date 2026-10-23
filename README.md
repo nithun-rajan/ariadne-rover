@@ -9,7 +9,7 @@
 
 ## My contribution
 
-*Nithun Sundarrajan: computer vision lead on a four-person team ([full team below](#team)).*
+*Nithun Sundarrajan: responsible for computer vision on a four-person team ([full team below](#team)).*
 
 I designed and built the rover's **computer vision pipeline**, the part
 that turns raw camera frames into a steering target:
