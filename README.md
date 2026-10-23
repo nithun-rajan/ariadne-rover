@@ -7,6 +7,25 @@
 ![C++17](https://img.shields.io/badge/C%2B%2B-17-orange)
 ![Platform](https://img.shields.io/badge/platform-Raspberry%20Pi%20%2B%20Pico-c51a4a)
 
+## My contribution
+
+*Nithun Sundarrajan: computer vision lead on a four-person team ([full team below](#team)).*
+
+I designed and built the rover's **computer vision pipeline**, the part
+that turns raw camera frames into a steering target:
+
+- **Marker detection:** adaptive thresholding and geometric quad filtering
+  that find marker borders reliably under uneven indoor lighting.
+- **Marker decoding:** perspective rectification and 4×4 grid reading with
+  rotation-invariant Hamming-distance matching, which tolerates misread cells
+  and rejects look-alike objects.
+- **Gate pairing and tracking:** pairing left/right cards into gates by size
+  and geometry, scoring candidates, and smoothing the gate centre over time
+  so the rover holds its lock through blur and dropouts.
+- **Pose-estimation research:** I investigated PnP (Perspective-n-Point)
+  pose estimation for single-camera distance and bearing sensing on the
+  rover, written up as an individual technical report [[1]](#references).
+
 [![Ariadne driving through the gate course](https://img.youtube.com/vi/BA4ykBaHccs/hqdefault.jpg)](https://www.youtube.com/watch?v=BA4ykBaHccs)
 
 *▶ Watch the rover run the course (YouTube)*
@@ -81,7 +100,7 @@ neural networks, no GPU, no external positioning.
   </tr>
   <tr>
     <td><em><b>In clutter.</b> The same pipeline in a busy lab: square-ish objects such as wall keypads are found but decoded as <code>unknown</code> and ignored, so only real markers form the gate.</em></td>
-    <td><em><b>Earlier prototype: PnP pose.</b> Perspective-n-Point recovers the distance (24.6 cm), bearing and elevation of a single marker from one camera. The final rover steers from the gate centre alone.</em></td>
+    <td><em><b>Earlier prototype: PnP pose.</b> Perspective-n-Point recovers the distance (24.6 cm), bearing and elevation of a single marker from one camera. Investigated in [[1]](#references); the final rover steers from the gate centre alone.</em></td>
   </tr>
 </table>
 
@@ -177,6 +196,8 @@ Built as a group project at the University of Southampton by
 **Shabarinath Hari** ([@shabarinath-hari](https://github.com/shabarinath-hari)) and
 **Andre Cicalese**.
 
-**My role (Nithun):** I worked on the computer vision pipeline: marker
-detection and decoding, gate pairing and scoring, and temporal tracking,
-which together turn raw camera frames into a steering target.
+## References
+
+1. N. Sundarrajan, "Investigating PnP Pose Estimation for Vision-Based
+   Distance and Object Sensing on an Autonomous Rover," individual technical
+   report, University of Southampton, 2026. Available on request.
