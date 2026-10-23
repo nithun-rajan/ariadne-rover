@@ -64,6 +64,27 @@ neural networks, no GPU, no external positioning.
 | Steering | [`steering.py`](vision/rover_vision/steering.py) | The frame is split into 26 vertical zones; the gate centre's zone is sent as a letter, `A` (far left) to `Z` (far right). |
 | Navigation | [`navigator.py`](vision/rover_vision/navigator.py) | A state machine (`SEARCHING → TRACKING → DROPOUT → CLEARING`) tells "haven't found a gate yet" apart from "the gate has slid out of view because I'm driving through it", drives straight through, and counts gates. Letter case alternates per gate (`A–Z`, then `a–z`). |
 
+### The pipeline, stage by stage
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/images/dev-square-candidates.jpg" alt="Stage 1: square candidates"></td>
+    <td width="50%"><img src="docs/images/dev-marker-decoding.jpg" alt="Stages 2-3: decoding and gate pairing"></td>
+  </tr>
+  <tr>
+    <td><em><b>Stage 1: candidates.</b> Adaptive thresholding and quad filtering find every marker border, with consistently ordered corners (0–3) and pixel area.</em></td>
+    <td><em><b>Stages 2–3: decoding and pairing.</b> Each card is decoded as <code>right</code> (red) or <code>left</code> (green). With four cards in view, the widest valid pair is chosen as the gate; its centre (yellow) falls in the <code>GO</code> zone.</em></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/dev-gate-in-clutter.jpg" alt="Gate detection in a cluttered lab"></td>
+    <td><img src="docs/images/dev-pnp-pose.jpg" alt="PnP pose estimation prototype"></td>
+  </tr>
+  <tr>
+    <td><em><b>In clutter.</b> The same pipeline in a busy lab: square-ish objects such as wall keypads are found but decoded as <code>unknown</code> and ignored, so only real markers form the gate.</em></td>
+    <td><em><b>Earlier prototype: PnP pose.</b> Perspective-n-Point recovers the distance (24.6 cm), bearing and elevation of a single marker from one camera. The final rover steers from the gate centre alone.</em></td>
+  </tr>
+</table>
+
 ### Motor controller ([`firmware/`](firmware/))
 
 The Pico turns letters into differential wheel speeds:
