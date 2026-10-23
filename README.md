@@ -2,6 +2,8 @@
 
 **A vision-guided autonomous rover that finds marker gates with a camera and threads its way through them.**
 
+**▶ [Watch the demo video on YouTube](https://www.youtube.com/watch?v=BA4ykBaHccs)**
+
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![OpenCV](https://img.shields.io/badge/OpenCV-4.10-green)
 ![C++17](https://img.shields.io/badge/C%2B%2B-17-orange)
